@@ -2,6 +2,9 @@
 ---
 layout: page
 title: build a blog
+categories:
+    - org
+    - emacs
 ---
 #+END_HTML
 * Blog
