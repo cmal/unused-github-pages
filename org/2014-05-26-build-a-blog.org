@@ -14,7 +14,7 @@ categories: org
 #+END_HTML
 
 * 使用Emacs org-mode和Jekyll搭建git pages博客 Using org to Blog with Jekyll
-  http://orgmode.org/worg/org-tutorials/org-jekyll.html
+  本文由 http://orgmode.org/worg/org-tutorials/org-jekyll.html 翻译而来.
 ** 概述
    Jekyll 是一个以Ruby写成的静态网页站点生成器. 它可以实用模板语言, 将多种的文本标记转换成静态的html. 生成的站点不需要额外的组件(如php)就几乎可以在任何web服务器上运行. Jekyll 是用于生成 Github's pages 的工具.
    本文讨论了如何实用Jekyll和org生成静态站点和博客. 不需要为org文件写标记语言处理器, 我们依赖于org自带的html导出特性来生成可以被Jekyll处理的文件.
