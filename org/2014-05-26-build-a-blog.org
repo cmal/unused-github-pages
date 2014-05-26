@@ -1,12 +1,19 @@
+#+TITLE: Using org to Blog with Jekyll
+#+AUTHOR: Yu Zhao 赵宇
+#+EMAIL: zyzy5730@163.com
+#+LANGUAGE: zh_CN
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+STARTUP:    hidestars
+
 #+BEGIN_HTML
 ---
 layout: page
-title: Build a blog
+title: 使用Emacs org-mode和Jekyll搭建git pages博客
 categories: org
 ---
 #+END_HTML
 
-* Using org to Blog with Jekyll
+* 使用Emacs org-mode和Jekyll搭建git pages博客 Using org to Blog with Jekyll
   http://orgmode.org/worg/org-tutorials/org-jekyll.html
 ** 概述
    Jekyll 是一个以Ruby写成的静态网页站点生成器. 它可以实用模板语言, 将多种的文本标记转换成静态的html. 生成的站点不需要额外的组件(如php)就几乎可以在任何web服务器上运行. Jekyll 是用于生成 Github's pages 的工具.
@@ -126,63 +133,63 @@ categories: org
    #+END_EXAMPLE
 ** 在首页显示博客文章 Showing Blog Posts on the Front Page
    大多数博客在其首页显示最新的文章. 下面的例子显示文章标题和五篇最新文章的摘录:
-   #+BEGIN_SRC html
+   #+BEGIN_EXAMPLE html
      <ul class="posts">
-     {% for post in site.posts limit: 5 %}
+     {{ "{% for post in site.posts limit: 5 "}} %}
        <div class="post_info">
 	 <li>
-		 <a href="{{ post.url }}">{{ post.title }}</a>
-		 <span>({{ post.date | date:"%Y-%m-%d" }})</span>
+		 <a href="{{"{{ post.url "}}}}">{{"{{ post.title "}}}}</a>
+		 <span>({{"{{ post.date | date:"%Y-%m-%d" "}}}})</span>
 	 </li>
-	 </br> <em>{{ post.excerpt }} </em>
+	 </br> <em>{{"{{ post.excerpt "}}}} </em>
 	 </div>
-       {% endfor %}
-     </ul>
-   #+END_SRC
+       {{ "{% endfor "}} %}
+     </ul>   
+   #+end_example
 ** 创建归档页面 Creating Archive Pages
    你可能只想在你的首页显示有限数量的博客文章. 但是, 你也会想要让旧的文章也可以看到. 你可以使用下面的标记创建一个所有博客文章的简要的列表.
-   #+BEGIN_SRC html
+   #+begin_example html
      <ul>
-       {% for post in site.posts %}
+       {{ "{% for post in site.posts "}} %}
        <li>
-	 <a href="{{ post.url }}" title="{{ post.title }}">
+	 <a href="{{"{{ post.url "}}}}" title="{{"{{ post.title "}}}}">
 	   <span class="date">
-	     <span class="day">{{ post.date | date: '%d' }}</span>
-	     <span class="month"><abbr>{{ post.date | date: '%b' }}</abbr></span>
-	     <span class="year">{{ post.date | date: '%Y' }}</span>
+	     <span class="day">{{"{{ post.date | date: '%d' "}}}}</span>
+	     <span class="month"><abbr>{{"{{ post.date | date: '%b' "}}}}</abbr></span>
+	     <span class="year">{{"{{ post.date | date: '%Y' "}}}}</span>
 	   </span>
-	   <span class="title">{{ post.title }}</span>
+	   <span class="title">{{"{{ post.title "}}}}</span>
 	 </a>
        </li>
-       {% endfor %}
+       {{ "{% endfor "}} %}
      </ul>
-   #+END_SRC
+   #+end_example
 ** 插入图片 Inserting Image
    你可能会想要将一些图片插入到你的博客文章中. 我使用下面的方法:
-   #+BEGIN_SRC html
+   #+BEGIN_EXAMPLE html
      <img src ="/images/skiddaw.jpg"
      alt="John and Ella on Skiddaw" align="left" width="300" height="250"
      title="John and Ella on Skiddaw" class="img"</img>
-   #+END_SRC
+   #+END_EXAMPLE
    注意, class属性指向你的css中用于处理图片标签风格的类(class). 我的css包含:
-   #+BEGIN_SRC css
+   #+BEGIN_EXAMPLE css
      img {
 	 margin: 15px;
 	 border: 1px solid blue;
      }
-   #+END_SRC
+   #+END_EXAMPLE
    注意, 如果你想要在你的图片和文本之间有一些空间, 在你的css中使用padding可能不会起作用. 我使用margin, 会起到同样的效果.
    尽管这样起作用, 但不会显示你的图片的标题. 我决定使用 [[http://www.w3.org/Style/Examples/007/figures][这里]] 描述的方法. 下面是一个将图片浮动到文本的右边的例子.
    在你的.org文件中, 使用下面的html来嵌入图片:
-   #+BEGIN_SRC html
+   #+BEGIN_EXAMPLE html
      <div class="photofloatr">
        <p><img src="myphoto.jpg" width="300"
 	 height="150" alt="My Mug Shot"></p>
        <p>A photo of me</p>
      </div>
-   #+END_SRC
+   #+END_EXAMPLE
    现在你需要添加一些样式表(CSS)信息:
-   #+BEGIN_SRC css
+   #+BEGIN_EXAMPLE css
      div.photofloatr {
 	 float: right;
 	 border: thin silver solid;
@@ -196,27 +203,29 @@ categories: org
        font-size: smaller;
        text-indent: 0;
      }
-   #+END_SRC
+   #+END_EXAMPLE
    第三种方式(但我自己还没有试过), 是使用 jQuery EXIF 插件来从图片的 EXIF 数据中抽取标题, 并使用 Javascript 来显示标题. [[http://www.nihilogic.dk/labs/exif/][这里]] 给出了更多细节.
+
 ** 在Front Matter中使用文本标记
    默认情况下, 你的文件的 Front Matter 部分的文本不会被 Jekyll 的标记引擎处理. 但是, 你可以使用 Textilize 滤镜(filter) 来将你的 Front Matter 字符串转换成 HTML, 使用 textile 标记格式化.
    我使用这一点来格式化我的页面摘录(excerpts), 这也包含在我的org文件的 Front Matter 标记中. 故, 在我的站点中, 有:
-   #+BEGIN_SRC html
+   #+BEGIN_EXAMPLE html
      <li>
-       <a href="{{ post.url }}">{{ post.title }}</a>
-       <span>({{ post.date | date:"%Y-%m-%d" }})</span>
+       <a href="{{"{{ post.url "}}}}">{{"{{ post.title "}}}}</a>
+       <span>({{"{{ post.date | date:"%Y-%m-%d" "}}}})</span>
      </li>
      </br>
-     <em>{{ post.excerpt | textilize}}</em>
-   #+END_SRC
-   这允许我在我的页面摘录中使用 textile 标记, 我的页面摘录定义在我的页面的 Front Matter section 中.
+     <em>{{"{{ post.excerpt | textilize "}}}}</em>
+   #+end_example
+   (其中使用{{"和"}}来引用liquid语法中的开闭tag, 注意用法, 需要前后颠倒.)
+   这允许我在我的页面摘录中使用textile标记, 我的页面摘录定义在我的页面的Front Matter Section中.
 ** Jekyll的版本控制 Version Control with Jekyll
    对Jekylly(项目)使用版本控制系统是合情合理的. 如果你遵循我建议的目录结构, 你可以在你的顶级目录中创建一个git仓库. 然后, 你可以创建一个 post-commit 脚本, 来运行 org html 导出, 然后运行 Jekyll 来生成你的站点.
 ** HappyBlogger 的 Jekyll 修改
    Bjørn Arild Mæland 对Jekyll作出了一些修改, 以提供一些org文件的预处理, 从而与Jekyll更好地整合. 你可以在 [[https://github.com/bmaland/happyblogger][github]] 上查看其源代码.
 ** Org-mode/Jekyll 用法的另一个例子 Another example of Org-mode/Jekyll usage
    [[http://orgmode.org/worg/org-contrib/babel/index.html][Org-babel]] 开发的在线文档被发布在 github 上, 使用了 Jekyll. The following code is used to publish one blog post for every subheading of the first to top-level headings of a org file which tracks Org-babel development. 结果可以在 [[http://eschulte.github.io/babel-dev/][这里]] 看到, 而创建这个站点的代码在 [[https://github.com/eschulte/babel-dev/][这里]] .
-   #+BEGIN_SRC org
+   #+BEGIN_SRC elisp
      (save-excursion
        ;; map over all tasks entries
        (let ((dev-file (expand-file-name
