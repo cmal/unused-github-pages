@@ -3,7 +3,7 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-pygments: true
+highlighter: true
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
@@ -12,7 +12,7 @@ title : 赵宇的博客
 tagline: Site Tagline
 author :
   name : Yu Zhao 赵宇
-  email : zyzy5730 AT 163 dot com
+  email : zyzy5730@163.com
   github : cmal
   twitter : zyzy5730
 #  feedburner : feedname
