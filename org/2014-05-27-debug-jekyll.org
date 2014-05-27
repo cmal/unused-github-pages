@@ -1,0 +1,36 @@
+#+TITLE: 搭建过程中出现的错误
+#+AUTHOR: Yu Zhao 赵宇
+#+EMAIL: zyzy5730@163.com
+#+LANGUAGE: zh_CN
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+STARTUP:    hidestars
+
+#+BEGIN_HTML
+---
+layout: page
+title: 搭建过程中出现的错误
+categories: misc
+tags: org jekyll
+---
+#+END_HTML
+
+* 搭建过程中出现的错误
+  由于在github pages上部署, 出现问题首先要在本地调试, 如果本地调试通过而远程出现问题, 需要使用CI集成工具调试. 由于起初我本地调试无法通过, 本地通过了之后远程自然通过了, 所以这里只说本地调试的过程.
+
+  首先要安装jekyll.
+  #+BEGIN_SRC sh
+  gem install jekyll
+  jekyll serve -t
+  #+END_SRC
+  跟踪一下错误的原因:
+  #+BEGIN_EXAMPLE
+  Liquid Exception: no implicit conversion of nil into String in xxx.html
+  #+END_EXAMPLE
+  
+  由于只能trace到出现问题的源代码行, 但是不知道具体在处理哪一句的时候出现的问题. 所以只能一点一点删除来尝试. 这样做是有风险的, 万一同一错误在多处出现, 由于文章很长, 就无法定位到错误, 最好的办法是二分法, 还是比较繁琐的. 幸运的是, 由于只有一处出现错误, 使得一番烦扰之后, 定位到了错误的位置.
+
+  分析错误出现的原因, 查看输出的结果(还是有问题的), 发现是由于org引用的源代码段中的 Liquid 代码被 Jekyll 中的 Liquid 处理引擎求值了. (本不希望被求值.)
+
+  经过反复搜索, 找到了在 Jekyll 中引用 Liquid 语法的方法, 还是比较繁琐的, 也比较奇怪. 这里不详述了, 尽量不要用. (想知道可以google, 也可以查看上一篇文章的源代码.)
+
+  
