@@ -28,17 +28,17 @@ tags: org jekyll
   2. 使用org导出你的页面到Jekyll项目目录
   3. 运行Jekyll以转换从org导出的html页面到你最终的站点
 
-  默认情况下, Jekyll在其工作目录中的\under{}site目录生成其输出. 这是你的站点的自包含的版本, 可以被部署到你的web服务器上. 在\under{}site中的文件是完全子包含的, 所以你只需要复制它们到你的web服务器中. 可以通过ftp, rsync, 或者一个 git post 提交钩子. 你可以通过 \under{}config.yml 配置 Jekyll 将其发布的配置文件放到哪里.
+  默认情况下, Jekyll在其工作目录中的_site目录生成其输出. 这是你的站点的自包含的版本, 可以被部署到你的web服务器上. 在_site中的文件是完全子包含的, 所以你只需要复制它们到你的web服务器中. 可以通过ftp, rsync, 或者一个 git post 提交钩子. 你可以通过 _config.yml 配置 Jekyll 将其发布的配置文件放到哪里.
 
-  本质上, 我使用org来生成页面上的<body>标签之间的任何内容, 而使用Jekyll来生成(页面的)其余部分. 注意, 你可以很容易地将html内容嵌入到你的org页面中, 方法是使用 +BEGIN\under{}HTML 标签.
+  本质上, 我使用org来生成页面上的<body>标签之间的任何内容, 而使用Jekyll来生成(页面的)其余部分. 注意, 你可以很容易地将html内容嵌入到你的org页面中, 方法是使用 +BEGIN_HTML 标签.
 * 安装Jekyll
   如何安装请参阅Jekyll的[[https://github.com/jekyll/jekyll][网站]].
 * 项目目录结构 Project Directory Structure
-  Jekyll 预期有一个特定的目录结构. 在下面的例子中, 我的Jekyll项目在一个叫做jekyll的目录中. 博客文章在\under{}posts目录中, 而布局模板在\under{}layouts目录中. \under{}includes目录用于存放一些包含你想要在其他页面中包含的代码的文件, 如头(header)和侧边栏(sidebar).
+  Jekyll 预期有一个特定的目录结构. 在下面的例子中, 我的Jekyll项目在一个叫做jekyll的目录中. 博客文章在_posts目录中, 而布局模板在_layouts目录中. _includes目录用于存放一些包含你想要在其他页面中包含的代码的文件, 如头(header)和侧边栏(sidebar).
 
-  文件\under{}config.yml是一个包含Jekyll对该站点的配置的YAML文件.
+  文件_config.yml是一个包含Jekyll对该站点的配置的YAML文件.
 
-  除了\under{}posts目录之外, 你还可以创建其它目录, 来存放你的站点的(不同的)非博客部分.
+  除了_posts目录之外, 你还可以创建其它目录, 来存放你的站点的(不同的)非博客部分.
   #+BEGIN_EXAMPLE
   '|myproject
   '|   |org
@@ -107,7 +107,7 @@ tags: org jekyll
   #+END_EXAMPLE
   所以你应该确保任何的Front Matter规则出现在你的org文件的开头.
 
-  注意, 三个连字符---是标记语言的一部分, 而且是必须的. 布局(layout)标签告诉Jekyll, 应该从它的\under{}layout目录中选择哪一个布局用于格式化你的页面. 你可以包含Front Matter Section的任何其他key, (例如, title:), 以用于你的页面. Front Matter 的更详细的细节请参阅 [[http://jekyllrb.com/docs/frontmatter/][Jekyll wiki]].
+  注意, 三个连字符---是标记语言的一部分, 而且是必须的. 布局(layout)标签告诉Jekyll, 应该从它的_layout目录中选择哪一个布局用于格式化你的页面. 你可以包含Front Matter Section的任何其他key, (例如, title:), 以用于你的页面. Front Matter 的更详细的细节请参阅 [[http://jekyllrb.com/docs/frontmatter/][Jekyll wiki]].
 
   下面是从我的org文件中抽取的一个简短的部分, 展示了我的设置:
   #+BEGIN_EXAMPLE
@@ -123,7 +123,7 @@ tags: org jekyll
   #+END_EXAMPLE
   记得那是一月初, 我们六个一起去旅行去了....
 
-  Front Matter Section 被包在+BEGIN\under{}HTML中, 故, 会以原文导出到最终的html文件. 你可能需要更新你的org版本, 因为老的版本会在导出时, 在Front Matter Section之前生成两个空行. 你可以定义你自己的Front Matter keys, 并将其用于你生成的页面中. 在上面的例子中, 我使用了"excerpt"key来显示为一篇博客文章显示"teasers".
+  Front Matter Section 被包在+BEGIN_HTML中, 故, 会以原文导出到最终的html文件. 你可能需要更新你的org版本, 因为老的版本会在导出时, 在Front Matter Section之前生成两个空行. 你可以定义你自己的Front Matter keys, 并将其用于你生成的页面中. 在上面的例子中, 我使用了"excerpt"key来显示为一篇博客文章显示"teasers".
 
   注意, org当前的git版本移除了第一个"---", 如果目录包含文件名以一个下划线开始的文件. 变通方法是在你文件的开头两行都使用"---".??
 
@@ -132,19 +132,19 @@ tags: org jekyll
   org-export-html-final-hook (always)
   org-publish-after-export-hook (when going through org-publish)
   #+END_EXAMPLE
-  一旦你已经将你的org项目导出为html了, 事情就仅仅是运行jekyll来生成最后的输出了. 默认情况下, Jekyll将其输出放到你的项目的\under{}site目录中, 但是你可以在\under{}config.yml文件中自定义.
+  一旦你已经将你的org项目导出为html了, 事情就仅仅是运行jekyll来生成最后的输出了. 默认情况下, Jekyll将其输出放到你的项目的_site目录中, 但是你可以在_config.yml文件中自定义.
 * 使用Jekyll和Org写博客 Blogging with Jekyll and Org
-  Jekyll有对于博客的内建支持. 任何你放到Jekyll项目的\under{}posts目录中的文件都被认为是博客文章. 但是, 你的博客文章的文件名必须遵守下面的格式:
+  Jekyll有对于博客的内建支持. 任何你放到Jekyll项目的_posts目录中的文件都被认为是博客文章. 但是, 你的博客文章的文件名必须遵守下面的格式:
   #+BEGIN_EXAMPLE
-  yyyy-mm-dd-post\under{}name.html
+  yyyy-mm-dd-post_name.html
   #+END_EXAMPLE
-  要写一篇文章, 只需要在你的org/\under{}posts目录中创建一个有正确的文件名的新文件. 你可能发现Yasnippet对于在你的org文件中插入Front Matter和其他规则很有用. 当你写完之后, 你只需要运行 C-c e X project\under{}name 来将你的org项目导出为html, 然后运行jekyll来生成你的站点.
+  要写一篇文章, 只需要在你的org/_posts目录中创建一个有正确的文件名的新文件. 你可能发现Yasnippet对于在你的org文件中插入Front Matter和其他规则很有用. 当你写完之后, 你只需要运行 C-c e X project_name 来将你的org项目导出为html, 然后运行jekyll来生成你的站点.
 
   你可以使用Jekyll的模板标记语言来决定你的博客文章如何显示. 在Jekyll站点页面上, 有许多站点, 而且带有源代码, 这样, 你就可以研究其他人如何使用标记创建他们的博客. 你也可以查看我的站点 http://www.ian-barton.com, 并在 http://github.com/geekinthesticks/ianbarton 查看源代码的快照.
 
   你可以给你的文章分配分类, 通过将文章放到某个文件夹之下, 如:
   #+BEGIN_EXAMPLE
-  \under{}posts/org/jekyll/howto.html
+  _posts/org/jekyll/howto.html
   #+END_EXAMPLE
   这会将你的文章分配到org和jekyll分类中.
   
@@ -304,6 +304,6 @@ tags: org jekyll
 ** Blorgit
    Blorgit使用org mode做标记语言, 并运行在 Sinatra 迷你框架上. 使用git来发博和维护是合情合理的.
 ** ikiwiki
-   ikiwiki 是一个站点编译器, 以Perl写成. 在许多方面与Jekyll想死, 但是与版本控制系统有更紧密的整合. 它支持博客, 并且有许多插件.
+   ikiwiki 是一个站点编译器, 以Perl写成. 在许多方面与Jekyll相似, 但是与版本控制系统有更紧密的整合. 它支持博客, 并且有许多插件.
 
    还有一个Manoj 写的 org mode 的插件, 允许你用 org 来写作博客, 并将它们转换成适合被 ikiwiki 处理的html.
